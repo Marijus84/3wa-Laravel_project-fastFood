@@ -21,6 +21,8 @@ class CreateRestaurantsTable extends Migration
             $table->string('post_code');
             $table->string('phone');
             $table->string('image_url');
+            $table->double('latitude', 8, 6);
+            $table->double('longitude', 8, 6);
             $table->double('avg_staff', 3, 1)->default(1.0)->nullable();
             $table->double('avg_delivery_speed', 3, 1)->default(1.0)->nullable();
             $table->double('avg_cleanliness', 3, 1)->default(1.0)->nullable();

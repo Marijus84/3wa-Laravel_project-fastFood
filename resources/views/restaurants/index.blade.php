@@ -38,7 +38,9 @@
           <td>{{$restaurant->avg_bathroom_quality}}</td>
           <td>{{$restaurant->avg_drive_through}}</td>
           <td>{{$restaurant->image}}</td>
-            </td>
+
+
+          @if(Auth::check() && Auth::user()->role == 'admin')
           <td>
             <form  action="{{route('restaurants.destroy',$restaurant->id)}}" method="POST">
               @csrf
@@ -47,8 +49,13 @@
             </form>
           </td>
           <td>  <a href="{{route('restaurants.edit', $restaurant->id)}}" class="btn btn-info btn-block">
-              Edit Restautant info</a>
+              Edit Restaurant info</a>
           </td>
+          @else
+          <td>  <a href="{{route('restaurants.show', $restaurant->id)}}" class="btn btn-info btn-block">
+              Show restaurant</a>
+          </td>
+          @endif
         </tr>
 
         @endforeach
@@ -58,6 +65,8 @@
   </tbody>
 </table>
 
+  @if(Auth::check() && Auth::user()->role == 'admin')
+
   <div class="row justify-content-center">
     <a href="{{route('restaurants.create')}}" class="btn btn-lg btn-success btn-block col-md-6  my-1">Add new restaurant</a>
   </div>
@@ -66,6 +75,7 @@
     <a href="{{route('home')}}" class="btn btn-lg btn-info btn-block col-md-6  my-1">Go to the start page</a>
   </div>
 
+  @endif
 
   <hr>
 

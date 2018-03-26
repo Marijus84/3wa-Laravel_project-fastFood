@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Input;
 
 class LiveController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+      $this->middleware('admin')->only('index', 'destroy');
+
+    }
+
     public function index()
     {
       $lives = Live::get();
@@ -38,9 +40,16 @@ class LiveController extends Controller
      */
     public function store(Request $request)
     {
-      Live::create(Input::all());
 
-        $lives = Live::orderBy('created_at', 'desc')->take(5)->get();
+      if ($request->title) {
+        Live::create(Input::all());
+      }
+
+        $lives = Live::orderBy('created_at', 'desc')->take($request->loadLives)->get();
+        foreach ($lives as $live) {
+          $live->posted = $live->updated_at->diffForHumans();
+
+        }
 
       echo json_encode($lives);
 

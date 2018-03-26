@@ -16,6 +16,10 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/restaurants/search', 'RestaurantController@search')->name('restaurant.search');
+Route::get('/restaurants/view', 'RestaurantController@view')->name('restaurants.view');
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('lives', 'LiveController');
 Route::resource('reviews', 'ReviewController');
+Route::resource('users', 'UserController');
+Route::post('reviews/load', 'ReviewController@load')->name('reviews.load');
+Route::post('restaurants/map', 'RestaurantController@map')->name('restaurant.map');

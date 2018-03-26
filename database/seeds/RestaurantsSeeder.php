@@ -25,6 +25,8 @@ class RestaurantsSeeder extends Seeder
       $restaurant->post_code = $faker->postCode;
       $restaurant->phone = $faker->phoneNumber;
       $restaurant->image_url = $url;
+      $restaurant->latitude = $faker->latitude($min = 50, $max = 60);
+      $restaurant->longitude = $faker->longitude($min = 20, $max = 30);     // 77.147489
       $restaurant->save();
     }
   }

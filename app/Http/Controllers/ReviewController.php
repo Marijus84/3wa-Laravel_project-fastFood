@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Restaurant;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,8 @@ class ReviewController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth');
+
+      $this->middleware('auth')->except('load');
     }
 
     public function index()
@@ -37,9 +39,20 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function load(Request $request)
     {
-        //
+      $reviews = Review::orderBy('created_at', 'desc')->take($request->loadReviews)->get();
+      foreach ($reviews as $review) {
+        $review->restaurant = Restaurant::select('network','adress_line_1','city','id')->where('id', $review->restaurant_id)->first();
+        $review->user = User::select('name','surname')->where('id', $review->user_id)->first();
+        $review->posted = $review->updated_at->diffForHumans();
+        
+        $review->href = route('restaurants.show', $review->restaurant->id);
+
+
+      }
+    echo json_encode($reviews);
+
     }
 
     /**

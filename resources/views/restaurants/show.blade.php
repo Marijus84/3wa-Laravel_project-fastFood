@@ -7,8 +7,6 @@
 
   <div class="row justify-content-center">
 
-
-
         <div class="col-md-5 mb-2 card">
 
           <img class="card-img-top" src="{{$restaurant->image_url}}" alt="Card image cap">
@@ -30,15 +28,19 @@
             <div class="text-muted"><h4>Staff: {{$review->staff}}</h4></div>
             <div class="text-muted"><h4>Bathroom Quality: {{$review->bathroom_quality}}</h4></div>
             <div class="text-muted"><h4>Drive through: {{$review->drive_through}}</h4></div>
-            <a href="{{route('reviews.edit', $review->id)}}" class="mb-2 btn btn-info btn-block">
-              Edit Review</a>
-            <form  action="{{route('reviews.destroy',$review->id)}}" method="POST">
-              @csrf
-              @method('DELETE')
-              <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
-              <button type="submit"class="btn btn-danger col-md-12 ">Delete Review</button>
-            </form>
-              <hr>
+
+              @if ((Auth::check() && Auth::user()->id == $review->user_id)||(Auth::check() && Auth::user()->role == 'admin'))
+              <a href="{{route('reviews.edit', $review->id)}}" class="mb-2 btn btn-info btn-block">
+                Edit Review</a>
+              <form  action="{{route('reviews.destroy',$review->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
+                <button type="submit"class="btn btn-danger col-md-12 ">Delete Review</button>
+              </form>
+                <hr>
+              @endif
+
             @endforeach
           </div>
 
@@ -54,7 +56,7 @@
 
 
 
-  @auth
+  @Auth
   <div class="row justify-content-center">
     <div class="col-md-3 justify-center">
       <button type="button" class="btn btn-success btn-lg btn-block" id="reviewBtn">Write review</button>

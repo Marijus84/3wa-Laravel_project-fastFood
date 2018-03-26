@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+      $this->middleware('admin')->only('index', 'create', 'destroy', 'edit', 'store');
+      //$this->middleware('auth')->only('index');
+    }
+
     public function index()
     {
 
@@ -24,6 +26,17 @@ class RestaurantController extends Controller
 
     }
 
+
+    public function map(Request $request)
+    {
+      $restaurants = Restaurant::get();
+      foreach ($restaurants as $restaurant) {
+        $restaurant->href = route('restaurants.show', $restaurant->id);
+      }
+
+    echo json_encode($restaurants);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,10 +47,21 @@ class RestaurantController extends Controller
       return view('restaurants/create');
     }
 
-    public function search(Request $request)
+
+    public function view(Request $request)
     {
 
+      $search = $request->find;
+      $restaurants = Restaurant::
+      where('network','LIKE', '%'.$search.'%')->
+      orWhere('adress_line_1','LIKE', '%'.$search.'%')->
+      orWhere('city','LIKE', '%'.$search.'%')->get();
 
+      return view('restaurants/index', ['restaurants'=> $restaurants]);
+    }
+
+    public function search(Request $request)
+    {
         $search = $request->name;
         $titles = Restaurant::select('network', 'adress_line_1', 'city', 'id')->
         where('network','LIKE', '%'.$search.'%')->
@@ -63,7 +87,7 @@ class RestaurantController extends Controller
 
       $this->validation($request);
 
-      $path = $request->file('image_url')->store('public/dishes');
+      $path = $request->file('image_url')->store('public/restaurant_img');
       $path = str_replace('public', 'storage', $path);
 
       $restaurant = new Restaurant();

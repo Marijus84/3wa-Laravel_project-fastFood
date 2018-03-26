@@ -8,7 +8,7 @@ class Restaurant extends Model
 {
 
   protected $fillable = [
-      'network', 'adress_line_1', 'city', 'post_code', 'phone', 'image_url'
+      'network', 'adress_line_1', 'city', 'post_code', 'phone', 'image_url','latitude', 'longitude'
   ];
 
   public function review()
