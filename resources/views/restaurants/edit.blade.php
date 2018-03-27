@@ -2,6 +2,9 @@
 
 @section('content')
 
+<main class="">
+
+
 
 <div class="container">
 
@@ -11,7 +14,7 @@
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Edit restaurant</h4>
 
-      <form action="{{route('restaurants.update', $restaurant->id)}}" method="POST" class="needs-validation" enctype="multipart/form-data" >
+      <form action="{{route('restaurants.update', $restaurant->id)}}" method="POST" class="needs-validation " enctype="multipart/form-data" >
         @csrf
         @method('PUT')
             <div class="row">
@@ -71,7 +74,31 @@
             </div>
 
             <div class="row">
-                <div class="col-md-8 mb-3">
+              <div class="col-md-12 mb-3">
+                <label for="price">Latitude in decimals</label>
+                <input type="number" step=".000001" class="form-control @if($errors->has('latitude')) is-invalid @endif" id="latitude" name="latitude" value = "{{old('latitude',$restaurant->latitude)}}">
+                @if($errors->has('latitude'))
+                <div class="invalid-feedback">
+                  {{$errors->first('latitude')}}
+                </div>
+                @endif
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="price">Longitude in decimals</label>
+                <input type="number" step=".000001" class="form-control @if($errors->has('longitude')) is-invalid @endif" id="longitude" name="longitude" value = "{{old('longitude',$restaurant->longitude)}}">
+                @if($errors->has('longitude'))
+                <div class="invalid-feedback">
+                  {{$errors->first('longitude')}}
+                </div>
+                @endif
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
                     <label for="title">Image url</label>
                     <input type="file" class="form-control @if($errors->has('image_url')) is-invalid @endif" id="image_url" name="image_url" value = "{{old('image_url',$restaurant->image_url)}}">
                     @if($errors->has('image_url'))

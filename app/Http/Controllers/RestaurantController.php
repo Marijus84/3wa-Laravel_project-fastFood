@@ -87,8 +87,13 @@ class RestaurantController extends Controller
 
       $this->validation($request);
 
-      $path = $request->file('image_url')->store('public/restaurant_img');
-      $path = str_replace('public', 'storage', $path);
+      if ($request->file('image_url')) {
+        $path = $request->file('image_url')->store('public/restaurant_img');
+        $path = str_replace('public', 'storage', $path);
+      }
+      else {
+        $path = '/storage/img/logo.jpg';
+      }
 
       $restaurant = new Restaurant();
       $restaurant->network = $request->network;
@@ -96,6 +101,8 @@ class RestaurantController extends Controller
       $restaurant->city = $request->city;
       $restaurant->post_code = $request->post_code;
       $restaurant->phone = $request->phone;
+      $restaurant->longitude = $request->longitude;
+      $restaurant->latitude = $request->latitude;
       $restaurant->image_url = $path;
 
       $restaurant->save();
@@ -107,7 +114,13 @@ class RestaurantController extends Controller
 
     public function show(Restaurant $restaurant)
     {
+      foreach ($restaurant->review as $review) {
 
+        $review->posted = $review->updated_at->diffForHumans();
+
+
+      }
+      $restaurant->review = $restaurant->review->sortByDesc('updated_at');
       return view('restaurants/show', ['restaurant'=> $restaurant]);
 
     }
@@ -126,34 +139,26 @@ class RestaurantController extends Controller
 
     public function update(Request $request, restaurant $restaurant)
     {
-      $rules = [
-        'network' => 'required|max:300',//iki 300 simboliu
-        'adress_line_1' => 'required|max:300',
-        'city' => 'required|max:300',
-        'post_code' => 'required|numeric',
-        'phone' => 'required|max:300',
+      $this->validation($request);
 
-      ];
 
       if($request->file('image_url')) { // Patikriname ar buvo pridėta nuotrauka
 
-          $rules['image_url'] = 'mimes:jpeg,png|max:500'; // Apsirašome nuotraukos
-                                                          // validacijos taisyklę
-                                                          // ir pridedame į taisyklių masyvą
+         // Apsirašome nuotraukos
+        // validacijos taisyklę
+        // ir pridedame į taisyklių masyvą
+        if ($restaurant->image_url!=='/storage/img/logo.jpg') {
 
-          $this->validate($request, $rules);
           $this->imgDelete($restaurant->image_url);
+        }
 
-          $path = $request->file('image_url')->store('public/dishes');
-          $path = str_replace('public', '/storage', $path);
+        $path = $request->file('image_url')->store('public/restaurant_img');
+        $path = str_replace('public', '/storage', $path);
 
-      }
-      else { // Jei nebuvo pridėta nuotrauka validuojame standartinėm taisyklėm
-          $this->validate($request, $rules);
-
-
-          $path = $restaurant->image_url; // $path prilyginam seno produkto nuotraukos URL'ui
-      }
+        }
+        else { // Jei nebuvo pridėta nuotrauka validuojame standartinėm taisyklėm
+        $path = $restaurant->image_url; // $path prilyginam seno produkto nuotraukos URL'ui
+        }
 
 
       $restaurant->network = $request->network;
@@ -161,6 +166,8 @@ class RestaurantController extends Controller
       $restaurant->city = $request->city;
       $restaurant->post_code = $request->post_code;
       $restaurant->phone = $request->phone;
+      $restaurant->longitude = $request->longitude;
+      $restaurant->latitude = $request->latitude;
       $restaurant->image_url = $path;
 
       $restaurant->update();
@@ -181,6 +188,12 @@ class RestaurantController extends Controller
      */
     public function destroy(restaurant $restaurant)
     {
+
+      if ($restaurant->image_url!=='/storage/img/logo.jpg') {
+
+        $this->imgDelete($restaurant->image_url);
+
+      }
       $restaurant->delete();
       return redirect()->route('restaurants.index');
     }
@@ -192,8 +205,10 @@ class RestaurantController extends Controller
       'adress_line_1' => 'required|max:300',
       'city' => 'required|max:300',
       'post_code' => 'required|numeric',
+      'longitude' => 'required|numeric',
+      'latitude' => 'required|numeric',
       'phone' => 'required|max:300',
-      'image_url' => 'required|mimes:jpeg,png|max:500'
+      'image_url' => 'mimes:jpeg,png|max:3000'
       ]);
     }
 

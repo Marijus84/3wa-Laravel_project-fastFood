@@ -10,4 +10,9 @@ class Review extends Model
   {
     return $this->hasOne('App\Restaurant','id', 'restaurant_id');
   }
+
+  public function user()
+  {
+    return $this->hasOne('App\User','id', 'user_id');
+  }
 }

@@ -2,6 +2,7 @@
 
 @section('content')
 
+<main class="">
 
 <div class="container">
 
@@ -64,6 +65,29 @@
                 @if($errors->has('phone'))
                 <div class="invalid-feedback">
                   {{$errors->first('phone')}}
+                </div>
+                @endif
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="price">Latitude in decimals</label>
+                <input type="number" step=".000001" class="form-control @if($errors->has('latitude')) is-invalid @endif" id="latitude" name="latitude" value = "{{$value = old('latitude')}}">
+                @if($errors->has('latitude'))
+                <div class="invalid-feedback">
+                  {{$errors->first('latitude')}}
+                </div>
+                @endif
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label for="price">Longitude in decimals</label>
+                <input type="number" step=".000001" class="form-control @if($errors->has('longitude')) is-invalid @endif" id="longitude" name="longitude" value = "{{$value = old('longitude')}}">
+                @if($errors->has('longitude'))
+                <div class="invalid-feedback">
+                  {{$errors->first('longitude')}}
                 </div>
                 @endif
               </div>

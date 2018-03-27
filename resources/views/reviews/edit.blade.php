@@ -2,6 +2,10 @@
 
 @section('content')
 
+<main>
+
+
+
 <div class="container">
 
 
@@ -32,7 +36,7 @@
       <input type="hidden" name="restaurant_id" value="{{$review->restaurant->id}}">
           <div class="row justify-content-center">
               <div class="col-md-4 mb-3">
-                  <label for="Speed">Delivery Speed</label>
+                  <label  class="white"for="Speed">Delivery Speed</label>
                   <select id="Delivery Speed" name="delivery_speed" class="form-control">
                     <option disabled selected>{{old('delivery_speed',$review->delivery_speed)}}</option>
                     <?php for ($i=0; $i <= 10 ; $i++) { ?>

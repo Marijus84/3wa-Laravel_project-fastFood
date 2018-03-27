@@ -46,6 +46,7 @@
                         <li><a class="nav-link" href="{{ route('reviews.index') }}">Reviews</a></li>
                     </ul>
                     @endif
+                  
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

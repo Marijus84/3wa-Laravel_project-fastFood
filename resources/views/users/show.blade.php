@@ -2,10 +2,14 @@
 
 @section('content')
 
+<main class="secondary">
+
+
+
 <div class="container">
 
 
-    <h1 class="text-center">Your information:</h1>
+    <h1 class="text-center py-5"><strong>Your information:</strong></h1>
     <div class="row justify-content-center">
 
 
@@ -17,12 +21,12 @@
               <p class="card-text">{{$user->email}}</p>
             </div>
 
-            <a href="{{route('users.edit', $user->id)}}" class="btn btn-info btn-block">
-              Edit your information</a>
+            <a href="{{route('users.edit', $user->id)}}"><button type="submit"class="btn btn-info col-md-8 ">Edit your info</button>
+              </a>
               <form  action="{{route('users.destroy',$user->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit"class="btn btn-danger col-md-12 ">Delete Your account</button>
+                <button type="submit"class="btn btn-danger col-md-8 my-2">Delete Your account</button>
               </form>
 
 

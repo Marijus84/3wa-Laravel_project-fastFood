@@ -20,7 +20,13 @@
 
       </div>
       </div>
+      <div class="row justify-content-center" >
+        <div class="col-md-6 " >
 
+        <h1 id = "logo" >fastFood Guru</h1>
+        <h2 class = "underLogo">Rate fastFood places<br>It's important where you eat!</h2>
+        </div>
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-4">
 
@@ -31,7 +37,7 @@
 
       </div>
 
-      <a href="#contStart" id = 'nextSection'><i class="fa fa-arrow-down fa-5x "></i></button></a>
+
   </div>
 </div>
 
@@ -72,7 +78,9 @@
 
     </div>
 
+
   </div>
+
   <div class="row justify-content-center">
 
     <div class="card-columns" id= "liveStream">
@@ -142,14 +150,7 @@ var loadReviews = 6;
 
 //$("body").css("overflow", "hidden");
 
-$(window).on("scroll", function() {
-    var scrollPos = $(window).scrollTop();
 
-    if (scrollPos == 0) {
-      $("body").css("overflow", "hidden");
-
-    }
-});
 
 
 
@@ -350,6 +351,7 @@ $(document).ready(function(){
        let search = $(this).val();
        if (search.length < 2) {
          $(".results").empty();
+           $("#logo, .underLogo").show();
          return;
        }
        setTimeout(function(){
@@ -370,6 +372,11 @@ $(document).ready(function(){
                diva.append(para);
                 }
                $(".results").append(diva);
+
+              if ($(".results").text() !== "") {
+                $("#logo,.underLogo").hide();
+              }
+
            },
            error: function(data){
            }

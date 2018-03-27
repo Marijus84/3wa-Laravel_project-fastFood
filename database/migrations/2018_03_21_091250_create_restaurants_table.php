@@ -28,6 +28,7 @@ class CreateRestaurantsTable extends Migration
             $table->double('avg_cleanliness', 3, 1)->default(1.0)->nullable();
             $table->double('avg_bathroom_quality', 3, 1)->default(1.0)->nullable();
             $table->double('avg_drive_through', 3, 1)->default(1.0)->nullable();
+            $table->double('avg_overall', 3, 1)->default(1.0)->nullable();
             $table->timestamps();
         });
     }

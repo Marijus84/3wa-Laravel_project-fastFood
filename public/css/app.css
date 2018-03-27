@@ -10011,10 +10011,16 @@ body {
 }
 
 main {
+  min-height: 90vh;
   background-image: url("/storage/img/test.gif");
   background-position: center;
   background-repeat: repeat-y;
   background-size: auto;
+}
+
+.secondary {
+  min-height: 90vh;
+  background-image: url("/storage/img/funny.jpg");
 }
 
 .full-height {
@@ -10077,6 +10083,7 @@ main {
   height: 50vh;
   width: 100%;
   border-top: solid;
+  border-bottom: solid;
 }
 
 #sectionIntro {
@@ -10094,6 +10101,8 @@ main {
 
 .btn-info,
 .btn-success,
+.btn-danger,
+.btn-primary,
 .form-control {
   background-color: white;
   color: black;
@@ -10104,14 +10113,6 @@ main {
 .card {
   border-color: #28a745;
   border-width: 2px;
-}
-
-#nextSection {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  z-index: 100;
-  color: #8B0000;
 }
 
 .x2 {
@@ -10132,5 +10133,68 @@ main {
 .name {
   font-size: 1.6rem;
   font-weight: bold;
+}
+
+.restImg {
+  max-width: 100%;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.restaurantInfo {
+  border: none;
+  background-image: url("/storage/img/b3.jpg");
+  background-position: center;
+  color: white;
+  border: solid 1px black;
+}
+
+.black {
+  color: black;
+}
+
+.white {
+  color: white;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.largerHr {
+  border: none;
+  height: 3px;
+  color: #333;
+  background-color: #333;
+}
+
+label {
+  font-size: 2rem;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.listImg {
+  max-width: 200px;
+}
+
+.invalid-feedback {
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+}
+
+#logo {
+  font-size: 5rem;
+  font-style: italic;
+}
+
+.underLogo {
+  font-size: 3rem;
+  font-style: italic;
 }
 
