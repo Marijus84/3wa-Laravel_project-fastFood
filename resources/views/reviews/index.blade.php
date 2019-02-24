@@ -11,7 +11,8 @@
   @if (Auth::check() && Auth::user()->role == 'admin')
 
 
-  <table class="table">
+
+  <table class="table" id="usrtable">
     <thead>
       <tr>
         <th scope="col">Image</th>
@@ -67,6 +68,7 @@
 
 </tbody>
 </table>
+
 
 
 

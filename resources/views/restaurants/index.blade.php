@@ -2,23 +2,33 @@
 
 @section('content')
 
+@if(!(Auth::check() && Auth::user()->role == 'admin'))
+<main class="secondary">
+
+@endif
 
 <div class="container">
-  <h1>Restaurants:</h1>
+  <h1 class="py-4">Restaurants:</h1>
 
 
       <table class="table">
         <thead>
           <tr>
+            @if((Auth::check() && Auth::user()->role == 'admin'))
+            <th scope="col">ID</th>
+            @endif
             <th scope="col">Network</th>
             <th scope="col">City</th>
             <th scope="col">Phone</th>
-            <th scope="col">Staff</th>
-            <th scope="col">Delivery speed</th>
-            <th scope="col">Cleanliness</th>
-            <th scope="col">Bathroom quality</th>
-            <th scope="col">Drive through</th>
+            <th scope="col">Overall value</th>
             <th scope="col">Image</th>
+            @if(Auth::check() && Auth::user()->role == 'admin')
+            <th scope="col">Edit Info</th>
+            <th scope="col">Delete</th>
+            @else
+            <th scope="col">Show</th>
+            @endif
+
           </tr>
         </thead>
         <tbody>
@@ -28,19 +38,21 @@
 
           @foreach($restaurants as $restaurant)
         <tr>
-          <th scope="row">    <a href="{{route('restaurants.show',$restaurant->id)}}">{{$restaurant->id}}</a></th>
-          <td>{{$restaurant->network}}</td>
-          <td>{{$restaurant->city}}</td>
-          <td>{{$restaurant->phone}}</td>
-          <td>{{$restaurant->avg_staff}}</td>
-          <td>{{$restaurant->avg_delivery_speed}}</td>
-          <td>{{$restaurant->avg_cleanliness}}</td>
-          <td>{{$restaurant->avg_bathroom_quality}}</td>
-          <td>{{$restaurant->avg_drive_through}}</td>
-          <td>{{$restaurant->image}}</td>
+          @if((Auth::check() && Auth::user()->role == 'admin'))
+          <th scope="row" class="align-middle">    <a href="{{route('restaurants.show',$restaurant->id)}}">{{$restaurant->id}}</a></th>
+          @endif
+          <td class="align-middle">{{$restaurant->network}}</td>
+          <td class="align-middle">{{$restaurant->city}}</td>
+          <td class="align-middle">{{$restaurant->phone}}</td>
+          <th class="align-middle">{{$restaurant->avg_overall}}</th>
+          <td scope="row"><img class="listImg" src="{{$restaurant->image_url}}" alt="Card image cap"></td>
+
 
 
           @if(Auth::check() && Auth::user()->role == 'admin')
+          <td>  <a href="{{route('restaurants.edit', $restaurant->id)}}" class="btn btn-info btn-block">
+            Edit Restaurant info</a>
+          </td>
           <td>
             <form  action="{{route('restaurants.destroy',$restaurant->id)}}" method="POST">
               @csrf
@@ -48,11 +60,8 @@
               <button type="submit" class="btn btn-danger col-md-12">Delete Restaurant</button>
             </form>
           </td>
-          <td>  <a href="{{route('restaurants.edit', $restaurant->id)}}" class="btn btn-info btn-block">
-              Edit Restaurant info</a>
-          </td>
           @else
-          <td>  <a href="{{route('restaurants.show', $restaurant->id)}}" class="btn btn-info btn-block">
+          <td >  <a href="{{route('restaurants.show', $restaurant->id)}}" class="btn btn-info btn-block">
               Show restaurant</a>
           </td>
           @endif

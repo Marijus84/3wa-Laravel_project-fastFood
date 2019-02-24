@@ -3,6 +3,9 @@
 @section('content')
 
 
+
+@endif
+
 <div class="container">
   <h1>Live feed:</h1>
 

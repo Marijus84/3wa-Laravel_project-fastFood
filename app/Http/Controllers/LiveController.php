@@ -95,10 +95,10 @@ class LiveController extends Controller
      * @param  \App\live  $live
      * @return \Illuminate\Http\Response
      */
-    public function destroy(live $life)
+    public function destroy(live $life, Request $request)
     {
       $life->delete();
-
+      $request->session()->flash('message', 'You have deleted live message!');
       return redirect()->route('lives.index');
     }
 }

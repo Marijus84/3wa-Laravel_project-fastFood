@@ -78,15 +78,19 @@ class UserController extends Controller
 
       if(Auth::check() && Auth::user()->role == 'admin'){
 
-        return redirect()->route('users.index');
+        $users = User::get();
+        $request->session()->flash('positive', "You have updated user's info!");
+        return view('users.index', ['users' => $users]);
 
       }
 
       elseif(Auth::check()) {
 
-        return redirect()->route('users.show', Auth::user()->id);
+        $user = User::where('id',Auth::user()->id)->first();
+        $request->session()->flash('positive', "You have updated your info!");
+        return view('users.show', ['user'=> $user]);
 
-      }  
+      }
     }
 
 
@@ -100,7 +104,7 @@ class UserController extends Controller
     public function destroy(User $user, Request $request)
     {
       $user->delete();
-
+      $request->session()->flash('message', 'You have deleted user!');
       return redirect()->route('users.index');
     }
 

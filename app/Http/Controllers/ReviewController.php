@@ -95,6 +95,8 @@ class ReviewController extends Controller
       $review->save();
 
       $this->updateFields($request);
+      $restaurant = Restaurant::where('id', $request->restaurant_id)->first();
+      $request->session()->flash('positive', 'You have created review!');
 
       return redirect()->route('restaurants.show', $request->restaurant_id);
 
@@ -159,7 +161,11 @@ class ReviewController extends Controller
 
       $this->updateFields($request);
 
-      return redirect()->route('restaurants.show', $request->restaurant_id);
+      $restaurant = Restaurant::where('id', $request->restaurant_id)->first();
+      $request->session()->flash('positive', 'You have edited review info!');
+
+      return view('restaurants/show', ['restaurant'=> $restaurant]);
+
 
     }
 
@@ -178,6 +184,7 @@ class ReviewController extends Controller
 
 
       $this->updateFields($request);
+      $request->session()->flash('message', 'You have deleted review!');
       return redirect()->route('restaurants.show', $request->restaurant_id);
 
     }

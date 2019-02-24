@@ -106,14 +106,18 @@ class RestaurantController extends Controller
       $restaurant->image_url = $path;
 
       $restaurant->save();
-
+      $request->session()->flash('positive', 'You have created new restaurant!');
 
       return redirect()->route('restaurants.index');
     }
 
 
-    public function show(Restaurant $restaurant)
+    public function show(Restaurant $restaurant, Request $request)
     {
+
+
+
+
       foreach ($restaurant->review as $review) {
 
         $review->posted = $review->updated_at->diffForHumans();
@@ -171,7 +175,7 @@ class RestaurantController extends Controller
       $restaurant->image_url = $path;
 
       $restaurant->update();
-
+      $request->session()->flash('positive', "You have edited restaurant's info!");
 
       //  $request->session()->flash('positive', 'You have edited dish info!');
 
@@ -186,7 +190,7 @@ class RestaurantController extends Controller
      * @param  \App\restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(restaurant $restaurant)
+    public function destroy(restaurant $restaurant, Request $request)
     {
 
       if ($restaurant->image_url!=='/storage/img/logo.jpg') {
@@ -195,6 +199,7 @@ class RestaurantController extends Controller
 
       }
       $restaurant->delete();
+      $request->session()->flash('message', 'You have deleted restaurant!');
       return redirect()->route('restaurants.index');
     }
 

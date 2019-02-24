@@ -10020,7 +10020,10 @@ main {
 
 .secondary {
   min-height: 90vh;
+  background-color: #1E82C0;
   background-image: url("/storage/img/funny.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
 
 .full-height {
@@ -10153,8 +10156,16 @@ main {
   color: black;
 }
 
-.white {
-  color: white;
+.star {
+  color: red;
+  font-size: 3rem;
+  line-height: 1.6rem;
+}
+
+.star-small {
+  color: red;
+  font-size: 1.8rem;
+  line-height: 1rem;
 }
 
 h2 {
@@ -10179,7 +10190,7 @@ h1 {
 }
 
 .listImg {
-  max-width: 200px;
+  max-width: 150px;
 }
 
 .invalid-feedback {
@@ -10196,5 +10207,9 @@ h1 {
 .underLogo {
   font-size: 3rem;
   font-style: italic;
+}
+
+.table {
+  background-color: rgba(255, 255, 255, 0.97);
 }
 

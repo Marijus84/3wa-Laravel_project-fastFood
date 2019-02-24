@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
   <div id="sectionIntro" >
 
   <div class="content text-center">
@@ -47,8 +49,13 @@
   <div id="map"></div>
   <main>
 
-
   <div class="container" > <a name = "contStart"></a>
+    <div id = "promptdiv" class= "alert-success text-center sticky-top" role = "alert">
+
+    </div>
+    <div id = "promptAlert" class= "alert-danger text-center sticky-top" role = "alert">
+
+    </div>
 
 
   <div class="row justify-content-center">
@@ -167,7 +174,32 @@ function getFeed(info){
            dataType: "json",
            data: info,//paima formos inputu reiksmes ir sudeda i viena eilute
            success: function(data){
+             // if (data.length < loadLives) {
+             //   let alert = $('#prompt');
+             //   alert.text("You can see all messages");
+             //   alert.addClass("py-4");
+             //   $('#promptdiv').animate({
+             //     opacity: 0,
+             //   }, 6000);
+             // }
+             if ((data.length) < loadLives) {
 
+             let alert = $('#prompt');
+             $("#loadMoreFeed").hide();
+             alert.empty();
+
+             let alertError = $('#promptAlert');
+
+             alertError.empty();
+             headInAlertError = $('<h2 id = "promptError" ></h2>');
+             headInAlertError.text("There are no more messages");
+             headInAlertError.addClass("py-4");
+             alertError.append(headInAlertError);
+             $('#promptAlert').animate({
+               opacity: 0,
+             }, 5000);
+
+             }
 
             $("#liveStream").empty();
             let diva = $("#liveStream")
@@ -315,6 +347,21 @@ $(document).ready(function(){
   $("#loadMoreFeed").on('click', function(e){
     e.preventDefault();
     loadLives += 4;
+
+
+
+                   let alert = $('#promptdiv');
+                   alert.css('opacity',1);
+                   alert.empty();
+                   headInAlert = $('<h2 id = "prompt" ></h2>');
+                   headInAlert.text("You have loaded more live messages");
+                   headInAlert.addClass("py-4");
+                   alert.append(headInAlert);
+                   $('#promptdiv').animate({
+                     opacity: 0,
+                   }, 5000);
+
+
     getFeed()}
   );
 

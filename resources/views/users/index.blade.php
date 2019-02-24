@@ -25,15 +25,15 @@
           <td>{{$user->email}}</td>
           <td>{{$user->role}}</td>
         </td>
+        <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-info btn-block">
+          Edit User's information</a>
+        </td>
           <td>
             <form  action="{{route('users.destroy',$user->id)}}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger col-md-12">Delete User</button>
             </form>
-          </td>
-          <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-info btn-block">
-            Edit User's information</a>
           </td>
         </tr>
 

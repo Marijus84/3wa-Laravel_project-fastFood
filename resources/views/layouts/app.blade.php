@@ -46,7 +46,7 @@
                         <li><a class="nav-link" href="{{ route('reviews.index') }}">Reviews</a></li>
                     </ul>
                     @endif
-                  
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -72,12 +72,35 @@
             </div>
         </nav>
 
-
+        @if($pos = session('positive'))
+          <div class="alert alert-success text-center  sticky-top" role = "alert">
+            <h2>{{$pos}}</h2>
+          </div>
+        @elseif($info = session('message'))
+        <div class="alert alert-danger text-center  sticky-top" role = "alert">
+          <h2>{{$info}}</h2>
+        </div>
+        @endif
             @yield('content')
         </main>
     </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+$(document).ready(function(){
+
+
+
+
+  $('.alert').animate({
+    opacity: 0,
+  }, 4000);
+})
+
+</script>
+
 </body>
 
 </html>

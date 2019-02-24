@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <main>
+
+
 
 @if ($errors->all())
 
@@ -60,7 +64,7 @@
         @csrf
         <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
         <div class="row justify-content-center">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-1">
             <label for="Speed">Delivery Speed</label>
             <select id="Delivery Speed" name="delivery_speed" class="form-control">
               <option disabled selected>Delivery Speed</option>
@@ -73,9 +77,7 @@
               {{$errors->first('delivery_speed')}}
             </div>
             @endif
-          </div>
 
-          <div class="col-md-4 mb-3">
             <label for="Speed">Cleanliness</label>
             <select id="Cleanliness" name="cleanliness" class="form-control">
               <option disabled selected>Cleanliness</option>
@@ -88,9 +90,7 @@
               {{$errors->first('cleanliness')}}
             </div>
             @endif
-          </div>
 
-          <div class="col-md-4 mb-3">
             <label for="Staff">Staff</label>
             <select id="Staff" name="staff" class="form-control">
               <option disabled selected>Staff</option>
@@ -105,7 +105,7 @@
             @endif
           </div>
 
-          <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-1">
             <label for="Bathroom quality">Bathroom quality</label>
             <select id="bathroom_quality" name="bathroom_quality" class="form-control">
               <option disabled selected>Bathroom Quality</option>
@@ -118,9 +118,7 @@
               {{$errors->first('bathroom_quality')}}
             </div>
             @endif
-          </div>
 
-          <div class="col-md-4 mb-3">
             <label for="Drive through">Drive through</label>
             <select id="drive_through" name="drive_through" class="form-control">
               <option disabled selected>Drive through</option>
@@ -133,24 +131,7 @@
               {{$errors->first('drive_through')}}
             </div>
             @endif
-          </div>
 
-
-
-        </div>
-        <div class="mb-3">
-          <label for="review">Review</label>
-          <textarea rows="2" class="form-control @if($errors->has('review')) is-invalid @endif" id="review" name="review">
-            {{$value = old('review')}}</textarea>
-            @if($errors->has('review'))
-            <div class="invalid-feedback">
-              {{$errors->first('review')}}
-            </div>
-            @endif
-          </div>
-
-          <div class="row">
-            <div class="col-md-12 mb-3">
               <label for="title">Choose an image</label>
               <input type="file" class="form-control @if($errors->has('image_url')) is-invalid @endif" id="image_url" name="image_url" value = "{{$value = old('image_url')}}">
               @if($errors->has('image_url'))
@@ -160,6 +141,20 @@
               @endif
             </div>
           </div>
+
+        <div class="row justify-content-center">
+        <div class="col-md-8 mb-3">
+          <label for="review">Review <span class="star">*</span></label>
+          <textarea rows="4" class="form-control @if($errors->has('review')) is-invalid @endif" id="review" name="review">
+            {{$value = old('review')}}</textarea>
+            @if($errors->has('review'))
+            <div class="invalid-feedback">
+              {{$errors->first('review')}}
+            </div>
+            @endif
+          </div>
+        </div>
+
 
           <hr class="mb-4">
           <div class="row justify-content-center">
