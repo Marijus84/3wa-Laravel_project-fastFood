@@ -1,0 +1,249 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+body {
+ // background-image: url('/storage/img/back.jpg');
+}
+
+html, body {
+    background-color: #fff;
+    color: #000;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+main {
+  min-height: 90vh;
+  background-image: url('/storage/img/test.gif');
+  background-position:center;
+  background-repeat:repeat-y;
+  background-size: auto;
+
+}
+
+.secondary {
+  min-height: 90vh;
+  background-color: #1E82C0;
+  background-image: url('/storage/img/funny.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.sectionIntro
+{
+  height: 50vh;
+}
+
+#map
+{
+ height: 50vh;
+ width: 100%;
+ border-top:solid;
+ border-bottom:solid;
+ //margin-bottom: 2rem;
+}
+
+#sectionIntro {
+  height: 45vh;
+  background-image: url('/storage/img/b3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  //border: solid;
+}
+
+#results {
+  font-weight: bold;
+  z-index: 30;
+}
+
+.btn-info, .btn-success, .btn-danger, .btn-primary, .form-control{
+  background-color: white;
+  color: black;
+  border-width: 2px;
+}
+
+.form-control, .card {
+  border-color: #28a745;
+  border-width: 2px;
+}
+
+
+
+.x2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.card-title {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.timeColor {
+  color: blue;
+  font-style: italic;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.restImg {
+  max-width:100%;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.restaurantInfo {
+  border: none;
+  background-image: url('/storage/img/b3.jpg');
+  background-position: center;
+  color: white;
+  border: solid 1px black;
+}
+
+.black {
+  color: black;
+}
+
+.star {
+  color: red;
+  font-size: 3rem;
+  line-height: 1.6rem;
+}
+
+.star-small {
+  color: red;
+  font-size: 1.8rem;
+  line-height: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.largerHr {
+  border: none;
+  height: 3px;
+  color:#333;
+  background-color:#333;
+}
+
+label {
+  //background-color: white;
+  font-size: 2rem;
+padding: 5px;
+//border: 2px solid green;
+border-radius: 5px;
+}
+
+input {
+  //text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.listImg {
+  max-width: 150px;
+}
+
+.invalid-feedback {
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+}
+
+#logo {
+  font-size: 5rem;
+  font-style: italic;
+}
+
+.underLogo {
+  font-size: 3rem;
+  font-style: italic;
+}
+
+.table {
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+// .wrapper {
+//   display: inline-block;
+// }
+// .wrapper * {
+//   float: right;
+// }
+// input {
+//   display: none;
+// }
+// label {
+//   font-size: 30px;
+// }
+//
+// input:checked ~ label {
+//   color: green;
